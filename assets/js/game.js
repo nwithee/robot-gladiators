@@ -61,25 +61,59 @@ var fight = function(enemyName) {
     }
 };
 
-for(var i =0; i <enemyNames.length; i++) {
-    if (playerHealth > 0) {
-        // Let player know what round they are in
-            window.alert("Welcome to Robot Gladiators! Round " + (i+1));
+var startGame = function(){
+
+    //reset player stats
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10
+
+    for(var i =0; i <enemyNames.length; i++) {
+        if (playerHealth > 0) {
+            // Let player know what round they are in
+                window.alert("Welcome to Robot Gladiators! Round " + (i+1));
         
-        //pick new enemy to fight based on index of hte enemyNames array
-        var pickedEnemyName = enemyNames[i];
+            //pick new enemy to fight based on index of hte enemyNames array
+            var pickedEnemyName = enemyNames[i];
         
-        //reset enemy health to 50
-        enemyHealth=50;
+            //reset enemy health to 50
+            enemyHealth=50;
         
-        // use debugger for debuggin
-        //debugger;
+            // use debugger for debuggin
+            //debugger;
         
-        //pass the picked enemies name to the fight function
-        fight(pickedEnemyName)
+            //pass the picked enemies name to the fight function
+            fight(pickedEnemyName)
+        }
+        // if player isn't alive, stop the game
+        else {
+            window.alert("You is dead :( Game Over!");
+        break;
+        }
+    }
+
+    //playagain
+    endGame();
+}
+
+var endGame = function() {
+    //player is still alive
+    if (playerHealth > 0){
+        window.alert("Great Job, you are not dead.  You still have" + playerMoney + ".");
     }
     else {
-        window.alert("You is dead.  Game Over!");
-        break;
+        window.alert("You died");
     }
-}
+
+    var playAgainConfirm = window.confirm("Would you like to play again?");
+
+    if (playAgainConfirm){
+        //restart game
+        startGame();
+    }
+    else {
+        window.alert("Thank you for playing Robot Gladiators!  Play again soon");
+    }
+};
+
+startGame ();
